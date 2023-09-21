@@ -4,10 +4,17 @@
 //4.특정 수치값을 백분율화 하는 로직처리
 //5.이미지소스가 모두 로딩되는 상태를 백분율로 변환
 
-const section = document.querySelector('section');
 //img노드생성
 //src속성생성
 //src속성노드에 value = img/pic0~100.jpg
+//위의 100번 반복돌리면서
+//append로 section프레임안에 반복추가
+
+//백분율 구하는 공식
+// 현재수치 / 전체수칙값 * 100 (백분율)
+// 현재수치 / 전체수칙값 * 200 (이백분율)
+const section = document.querySelector('section');
+
 for (let el = 0; el <= 200; el++) {
 	const img = document.createElement('img');
 	const src = document.createAttribute('src');
@@ -15,5 +22,11 @@ for (let el = 0; el <= 200; el++) {
 	img.setAttributeNode(src);
 	section.append(img);
 }
-//위의 100번 반복돌리면서
-//append로 이미지 요소 반복추가
+window.addEventListener('mousemove', (e) => {
+	const curPos = e.pageX;
+	const wid = window.innerWidth;
+	const percent = parseInt((curPos / wid) * 200);
+	console.log(percent);
+	//parseInt(숫자) : 실수에서 소수점 아래를 버려서 정수반환
+	//parseFLoat(숫자) : 소수점 아래까지 있는 실수 반환
+});
