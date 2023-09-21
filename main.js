@@ -3,7 +3,7 @@ const num = 200;
 const aside = document.querySelector('aside');
 const imgs = createImgs(section, 200);
 const loadingNum = document.querySelector('aside p span');
-
+const delay = convertspeed(aside);
 window.addEventListener('mousemove', (e) => {
 	const percent = getPercent(e, num);
 	activation(imgs, percent);
@@ -30,11 +30,13 @@ function createImgs(target, num) {
 		img.onload = () => {
 			count++;
 			loadingNum.innerText = parseInt(count / 2);
-			console.log('현재 로딩된 소스이미지', count);
 			if (count === num) {
 				//동적으로 만들어진 img요소에 소스이미지가 렌더링완료된 시점
 				console.log('모든 소스이미지 로딩완료');
-				aside.remove();
+				aside.classList.add('off');
+				setTimeout(() => {
+					aside.remove();
+				}, delay);
 			}
 		};
 	});
@@ -44,4 +46,12 @@ function createImgs(target, num) {
 function activation(arr, index) {
 	arr.forEach((el) => (el.style.display = 'none'));
 	arr[index].style.display = 'block';
+}
+//인수로 Transition-duration값을 구해야하는 DOM요소를 전달받음
+
+function convertspeed(el) {
+	//해당요소의 Transition-duration값을 재연산해서 가져온다음
+	//숫자로 바꾸고 *1000 해서 밀리세컨트형대로 반환
+	const result = getComputedStyle(el).transitionDuration;
+	return parseFloat(result) * 1000;
 }

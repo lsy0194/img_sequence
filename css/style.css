@@ -51,6 +51,11 @@ aside {
   font-size: 100px;
   color: #fff;
   font-family: "Orbitron";
+  transition: opacity 2s;
+  opacity: 1;
+}
+aside.off {
+  opacity: 0;
 }
 
 /*# sourceMappingURL=style.css.map */
