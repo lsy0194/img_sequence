@@ -13,15 +13,13 @@
 //백분율 구하는 공식
 // 현재수치 / 전체수칙값 * 100 (백분율)
 // 현재수치 / 전체수칙값 * 200 (이백분율)
+
 const section = document.querySelector('section');
 
-for (let el = 0; el <= 200; el++) {
-	const img = document.createElement('img');
-	const src = document.createAttribute('src');
-	src.value = `img/pic${el}.jpg`;
-	img.setAttributeNode(src);
-	section.append(img);
-}
+const imgs = createImgs(section, 200);
+
+console.log(imgs);
+
 window.addEventListener('mousemove', (e) => {
 	const curPos = e.pageX;
 	const wid = window.innerWidth;
@@ -30,3 +28,15 @@ window.addEventListener('mousemove', (e) => {
 	//parseInt(숫자) : 실수에서 소수점 아래를 버려서 정수반환
 	//parseFLoat(숫자) : 소수점 아래까지 있는 실수 반환
 });
+
+//인수로 갯수를 받아서 동적으로 img 생성해 주는 함수
+function createImgs(target, num) {
+	for (let el = 0; el < num; el++) {
+		const img = document.createElement('img');
+		const src = document.createAttribute('src');
+		src.value = `img/pic${el}.jpg`;
+		img.setAttributeNode(src);
+		target.append(img);
+	}
+	return target.querySelectorAll('img');
+}
