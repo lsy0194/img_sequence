@@ -1,5 +1,6 @@
 const section = document.querySelector('section');
 const num = 200;
+const aside = document.querySelector('aside');
 const imgs = createImgs(section, 200);
 const loadingNum = document.querySelector('aside p span');
 
@@ -33,6 +34,7 @@ function createImgs(target, num) {
 			if (count === num) {
 				//동적으로 만들어진 img요소에 소스이미지가 렌더링완료된 시점
 				console.log('모든 소스이미지 로딩완료');
+				aside.remove();
 			}
 		};
 	});
